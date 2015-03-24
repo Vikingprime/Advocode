@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">AdvoCode2015</string>
+
+    <string name="title_activity_main">AdvoCode</string>
+    <string name="title_activity_start">AdvoCode</string>
+
+    <string name="about_us_text">
+        This database is provided to medical professionals in order
+        to provide the best care and options possible for their patients.
+    </string>
+    <string name="feedback_text">Leave Us Feedback</string>
+
+
+    <string name="hint1">Enter a ZipCode Here</string>
+    <string name="desc">This is the starting image</string>
+
+    <string name="rate_us">Rate Our App</string>
+
+    <string name="textpart1">Hello. This is Vikas. </string>
+    <string name="textpart2">I am here to remind you about </string>
+    <string name="textpart3">. You can contact them at </string>
+    <string name="textpart4">. Thank you.</string>
+
+
+</resources>

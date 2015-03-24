@@ -1,0 +1,192 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="#ffd5fadc"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:tools="http://schemas.android.com/tools"
+
+        tools:context="com.vuadvocate.advocode2015.MainActivity">
+
+        <LinearLayout
+            android:background="#ffd5fadc"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:id="@+id/name"
+                android:layout_gravity="center_horizontal"
+                android:textSize="20dp"
+                android:textColor="#2F4F4F"
+                android:layout_marginLeft="@dimen/horizontal_margin"
+                android:layout_marginRight="@dimen/horizontal_margin" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:text="Address Line 1"
+                android:id="@+id/Address1"
+                android:layout_gravity="center_horizontal"
+                android:textSize="20dp"
+                android:textColor="#2F4F4F"
+                android:layout_marginLeft="@dimen/horizontal_margin"
+                android:layout_marginRight="@dimen/horizontal_margin" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:text="Address Line 2"
+                android:id="@+id/Address2"
+                android:layout_gravity="center_horizontal"
+                android:textSize="20dp"
+                android:textColor="#2F4F4F"
+                android:layout_marginLeft="@dimen/horizontal_margin"
+                android:layout_marginRight="@dimen/horizontal_margin" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:text="Email Address"
+                android:id="@+id/emailaddress"
+                android:layout_gravity="center_horizontal"
+                android:textSize="20dp"
+                android:textColor="#2F4F4F"
+                android:layout_marginLeft="@dimen/horizontal_margin"
+                android:layout_marginRight="@dimen/horizontal_margin" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:id="@+id/website"
+                android:layout_gravity="center_horizontal"
+                android:textSize="20dp"
+                android:textColor="#2F4F4F"
+                android:layout_marginLeft="@dimen/horizontal_margin"
+                android:layout_marginRight="@dimen/horizontal_margin" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Phone Number"
+                android:id="@+id/phonenumber"
+                android:layout_gravity="center_horizontal"
+                android:textSize="20dp"
+                android:textColor="#2F4F4F"
+                android:layout_marginLeft="@dimen/horizontal_margin"
+                android:layout_marginRight="@dimen/horizontal_margin" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Category"
+                android:id="@+id/category"
+                android:layout_gravity="center_horizontal"
+                android:textSize="20dp"
+                android:textColor="#2F4F4F"
+                android:layout_marginLeft="@dimen/horizontal_margin"
+                android:layout_marginRight="@dimen/horizontal_margin" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Bus Services"
+                android:id="@+id/bus"
+                android:layout_gravity="center_horizontal"
+                android:textSize="25dp"
+                android:textColor="#2F4F4F"
+                android:layout_marginLeft="@dimen/horizontal_margin"
+                android:layout_marginRight="@dimen/horizontal_margin" />
+
+            <Spinner
+                android:id="@+id/hoursSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/btn_dropdown"
+                android:spinnerMode="dropdown"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:background="#ffd5fadc"
+            android:orientation="vertical"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+            <RatingBar
+                android:id="@+id/ratingbar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:numStars="5"
+                android:stepSize="1.0"></RatingBar>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/info_button_height"
+                android:onClick="submitIt"
+                android:text="Submit Rating"
+                android:id="@+id/btn_Submit"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/horizontal_margin"
+                android:layout_marginRight="@dimen/horizontal_margin" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/info_button_height"
+                android:text="Map It"
+                android:onClick="mapIt"
+                android:id="@+id/btn_Map"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/horizontal_margin"
+                android:layout_marginRight="@dimen/horizontal_margin" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/info_button_height"
+                android:onClick="sendIt"
+                android:text="Send It"
+                android:id="@+id/btn_Send"
+                android:layout_marginLeft="@dimen/horizontal_margin"
+                android:layout_marginRight="@dimen/horizontal_margin" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Phone Number"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:id="@+id/textNumber"
+                android:layout_marginLeft="@dimen/horizontal_margin"
+                android:layout_marginRight="@dimen/horizontal_margin" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/info_button_height"
+                android:onClick="saveIt"
+                android:text="Save It"
+                android:id="@+id/btn_Save"
+                android:layout_marginLeft="@dimen/horizontal_margin"
+                android:layout_marginRight="@dimen/horizontal_margin" />
+
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
