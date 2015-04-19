@@ -3,9 +3,13 @@ package com.vuadvocate.advocode2015;
 import android.app.Activity;
 import android.app.FragmentTransaction;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -19,12 +23,13 @@ import android.widget.TextView;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 
-public class MainActivity extends Activity {
+public class MainActivity extends ActionBarActivity {
 
     private final int blue = 0Xff5b88f0;
     private final int gray = 0XFF63706c;
@@ -45,29 +50,68 @@ public class MainActivity extends Activity {
     private InfoFragment mInfoFragment;
     private SearchMedFragment msearchMedFragment;
     private SearchResFragment msearchResFragment;
+    private SharedPreferences prefs;
+    private final String INFO = "info";
+    private final String favcode = "fave";
+    private final String reccode = "recent";
+    private ArrayList<String> recentlist;
+    private ArrayList<String> favlist;
 
     private String[] clinicNamesArray;
-    private String selection;
+    private String selection=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        setContentView(R.layout.activity_start);
+        prefs = getApplicationContext().getSharedPreferences(INFO, Context.MODE_PRIVATE);
         mButtonMed = (Button) findViewById(R.id.btn_Med);
-        mButtonAbout = (Button) findViewById(R.id.btn_About);
+        mButtonAbout = (Button) findViewById(R.id.btn_Recent);
         mButtonRes = (Button) findViewById(R.id.btn_Res);
         mButtonFav = (Button) findViewById(R.id.btn_Favorites);
+        Intent intent = getIntent();
+        final String val = intent.getStringExtra("VAL");
+
 
         Runnable setUpFrags = new Runnable() {
             public void run() {
+                try {
+                    recentlist = (ArrayList<String>) ObjectSerializer.deserialize(
+                            prefs.getString(reccode, ObjectSerializer.serialize(new ArrayList<String>())));
+                    favlist = (ArrayList<String>) ObjectSerializer.deserialize(
+                            prefs.getString(favcode, ObjectSerializer.serialize(new ArrayList<String>())));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 mMedicationFragment = new MedicationFragment();
                 mResourceFragment = new ResourceFragment();
                 mAboutUsFragment = new AboutUsFragment();
                 mFavoriteFragment = new FavoriteFragment();
+                Fragment open;
+                if(val.equals("Favorites")){
+                    open = mFavoriteFragment;
+                    openFavorites(null);
+                }
+                else if(val.equals("Recents")){
+                    open = mAboutUsFragment;
+                    openAbout(null);
+                }
+                else {
+                    open = mResourceFragment;
+                    openRes(null);
+                    if(!val.equals("Other")){
+                        selection = val;
+                        storerecent(selection);
 
+                        mInfoFragment = new InfoFragment();
+                        mInfoFragment.setArguments(getQueryInfo());
 
-                openRes(null);
+                        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                        transaction.replace(R.id.topSection, mInfoFragment);
+                        transaction.commit();
+                    }
+                }
+
             }
         };
 
@@ -100,17 +144,39 @@ public class MainActivity extends Activity {
     }
 
     public void openAbout(View v) {
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.topSection, mAboutUsFragment);
-        transaction.commit();
-        aboutSelected();
+        Runnable about = new Runnable() {
+            public void run() {
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.topSection, mAboutUsFragment);
+                transaction.commit();
+
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        aboutSelected();
+                        getRecents();
+                    }
+                });
+            }
+        };
+        new Thread(about).start();
     }
 
     public void openFavorites(View v) {
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.topSection, mFavoriteFragment);
-        transaction.commit();
-        favoritesSelected();
+        Runnable about = new Runnable() {
+            public void run() {
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.topSection, mFavoriteFragment);
+                transaction.commit();
+
+                runOnUiThread(new Runnable() {
+                    public void run() {
+                        favoritesSelected();
+                        getFavorites();
+                    }
+                });
+            }
+        };
+        new Thread(about).start();
     }
 
     private void medSelected() {
@@ -186,6 +252,18 @@ public class MainActivity extends Activity {
         clinicNamesArray = cats;
         registerClickCallback();
     }
+    private void getRecents(){
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.items, recentlist);
+        listView = (ListView) findViewById(R.id.listViewRec);
+       listView.setAdapter(adapter);
+        findinfofrag(listView);
+    }
+    private void getFavorites(){
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.items, favlist);
+        listView = (ListView) findViewById(R.id.listViewFav);
+        listView.setAdapter(adapter);
+        findinfofrag(listView);
+    }
 
     public void getList() {
 
@@ -248,13 +326,15 @@ public class MainActivity extends Activity {
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, R.layout.itemitem, clinicNamesArray);
         listView2 = (ListView) findViewById(R.id.listViewRes2);
         listView2.setAdapter(adapter2);
-
-        listView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        findinfofrag(listView2);
+    }
+    private void findinfofrag(ListView list){
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> paret, View ViewClicked, int position, long id) {
                 TextView textView = (TextView) ViewClicked;
                 selection = textView.getText().toString();
-
+                storerecent(selection);
                 mInfoFragment = new InfoFragment();
                 mInfoFragment.setArguments(getQueryInfo());
 
@@ -264,6 +344,32 @@ public class MainActivity extends Activity {
             }
         });
     }
+    private void storerecent(String select){
+        recentlist.remove(select);
+        recentlist.add(select);
+        if(recentlist.size()>=15){
+            recentlist.remove(0);
+        }
+        SharedPreferences.Editor editor = prefs.edit();
+        try {
+            editor.putString(reccode, ObjectSerializer.serialize(recentlist));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        editor.commit();
+    }
+    private void storefavorite(String select){
+        favlist.remove(select);
+        favlist.add(select);
+        SharedPreferences.Editor editor = prefs.edit();
+        try {
+            editor.putString(favcode, ObjectSerializer.serialize(favlist));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        editor.commit();
+    }
+
 
     private Bundle getQueryInfo() {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("ResourceInfo");
@@ -326,13 +432,13 @@ public class MainActivity extends Activity {
             address2 = "Not Available";
         }
 
-        String Mon = "Mon";
-        String Tue = "Tue";
-        String Wed = "Wed";
-        String Thu = "Thu";
-        String Fri = "Fri";
-        String Sat = "Sat";
-        String Sun = "Sun";
+        String Mon = "Mon ";
+        String Tue = "Tue ";
+        String Wed = "Wed ";
+        String Thu = "Thu ";
+        String Fri = "Fri ";
+        String Sat = "Sat ";
+        String Sun = "Sun ";
 
         if (mobject.has("monday")) {
             String MonOpen = mobject.getString("monday");
@@ -437,6 +543,12 @@ public class MainActivity extends Activity {
         ret.putDouble("Rating", rating);
 
         return ret;
+    }
+    public void onFavorite(View v){
+        TextView name = (TextView) findViewById(R.id.name);
+        String Name = name.getText().toString();
+        storefavorite(Name);
+
     }
 
     public void submitIt(View v) {

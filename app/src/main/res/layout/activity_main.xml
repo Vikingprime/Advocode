@@ -1,67 +1,39 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<android.support.v4.widget.DrawerLayout
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:id="@+id/drawer_layout"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin2"
+    android:paddingRight="@dimen/activity_horizontal_margin2"
+    android:paddingTop="@dimen/activity_vertical_margin2"
+    tools:context="com.vuadvocate.advocode2015.StartActivity"
+    android:background="@drawable/vumc">
+
+    <ImageView
+        android:id="@+id/VUMCtext"
+        android:src="@drawable/vumclabel"
+        android:layout_width="@dimen/VUMC"
+        android:layout_height="@dimen/VUMC"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:text="@string/slider"
+        android:textSize="@dimen/abc_text_size_medium_material"
+        android:textColorHighlight="@color/orange"
+        android:id="@+id/slide"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>
+<ListView android:id="@+id/left_drawer"
+    android:layout_width="240dp"
     android:layout_height="match_parent"
-    tools:context="com.vuadvocate.advocode2015.MainActivity"
-    android:orientation="vertical"
-    android:background="@color/background_color">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="15"
-        android:orientation="vertical"
-        android:id="@+id/topSection">
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/button_height"
-        android:layout_gravity="bottom">
-
-        <Button
-            android:id="@+id/btn_Res"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:onClick="openRes"
-            android:text="Resources"
-            android:layout_weight="1"
-            android:background = "@color/button_color_selected"
-            android:textColor="@color/button_text"/>
-
-        <Button
-            android:id="@+id/btn_Med"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:onClick="openMed"
-            android:text="Medication"
-            android:layout_weight="1"
-            android:background = "@color/button_color_unselected"
-            android:textColor="@color/button_text"/>
-
-        <Button
-            android:id="@+id/btn_Favorites"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:onClick="openFavorites"
-            android:text="Favorites"
-            android:layout_weight="1"
-            android:background = "@color/button_color_unselected"
-            android:textColor="@color/button_text"/>
-
-        <Button
-            android:id="@+id/btn_About"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:onClick="openAbout"
-            android:text="About Us"
-            android:layout_weight="1"
-            android:background = "@color/button_color_unselected"
-            android:textColor="@color/button_text"/>
-
-    </LinearLayout>
-
-</LinearLayout>
-
+    android:layout_gravity="start"
+    android:choiceMode="singleChoice"
+    android:divider="@android:color/transparent"
+    android:dividerHeight="0dp"
+    android:background="#111"/>
+</android.support.v4.widget.DrawerLayout>
 

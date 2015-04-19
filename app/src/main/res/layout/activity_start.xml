@@ -1,47 +1,65 @@
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color"
+    tools:context="com.vuadvocate.advocode2015.MainActivity"
     android:orientation="vertical"
-    tools:context="com.vuadvocate.advocode2015.StartActivity">
-
-    <ImageView
-        android:id="@+id/entry"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:src="@drawable/shadetree" />
+    android:background="@color/background_color">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/linearLayout"
-        android:orientation="horizontal">
-
-        <EditText
-            android:layout_weight="4"
-            android:id="@+id/location"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:hint="@string/hint1"
-            android:ellipsize="end"
-            android:maxLines="1"/>
-
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Submit"
-            android:id="@+id/addit"
-            android:clickable="true"
-            android:onClick="onButtonClick"
-            android:background="@color/button_color_unselected"/>
+        android:layout_height="0dp"
+        android:layout_weight="15"
+        android:orientation="vertical"
+        android:id="@+id/topSection">
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/button_height"
+        android:layout_gravity="bottom">
 
+        <Button
+            android:id="@+id/btn_Res"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:onClick="openRes"
+            android:text="Resources"
+            android:layout_weight="1"
+            android:background = "@color/button_color_selected"
+            android:textColor="@color/button_text"/>
+
+        <Button
+            android:id="@+id/btn_Med"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:onClick="openMed"
+            android:text="Medication"
+            android:layout_weight="1"
+            android:background = "@color/button_color_unselected"
+            android:textColor="@color/button_text"/>
+
+        <Button
+            android:id="@+id/btn_Favorites"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:onClick="openFavorites"
+            android:text="Favorites"
+            android:layout_weight="1"
+            android:background = "@color/button_color_unselected"
+            android:textColor="@color/button_text"/>
+
+        <Button
+            android:id="@+id/btn_Recent"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:onClick="openAbout"
+            android:text="Recents"
+            android:layout_weight="1"
+            android:background = "@color/button_color_unselected"
+            android:textColor="@color/button_text"/>
+
+    </LinearLayout>
 </LinearLayout>

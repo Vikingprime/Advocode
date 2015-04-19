@@ -13,7 +13,7 @@
         tools:context="com.vuadvocate.advocode2015.MainActivity">
 
         <LinearLayout
-            android:background="#ffd5fadc"
+            android:background="@color/background_color"
             android:orientation="vertical"
             android:layout_weight="1"
             android:layout_width="match_parent"
@@ -126,7 +126,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:background="#ffd5fadc"
+            android:background="@color/background_color"
             android:orientation="vertical"
             android:layout_weight="1"
             android:layout_width="match_parent"
@@ -143,8 +143,8 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/info_button_height"
-                android:onClick="submitIt"
-                android:text="Submit Rating"
+                android:onClick="onFavorite"
+                android:text="Mark as Favorite"
                 android:id="@+id/btn_Submit"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginLeft="@dimen/horizontal_margin"
@@ -178,14 +178,6 @@
                 android:layout_marginLeft="@dimen/horizontal_margin"
                 android:layout_marginRight="@dimen/horizontal_margin" />
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/info_button_height"
-                android:onClick="saveIt"
-                android:text="Save It"
-                android:id="@+id/btn_Save"
-                android:layout_marginLeft="@dimen/horizontal_margin"
-                android:layout_marginRight="@dimen/horizontal_margin" />
 
         </LinearLayout>
     </LinearLayout>

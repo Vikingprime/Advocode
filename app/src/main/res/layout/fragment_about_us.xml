@@ -6,36 +6,25 @@
     android:orientation="vertical"
     tools:context="com.vuadvocate.advocode2015.AboutUsFragment">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:id="@+id/imageView"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/shadetree" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:textSize="25dp"
-        android:gravity="center"
-        android:textColor="#2F4F4F"
-        android:layout_height="186dp"
-        android:text="@string/about_us_text"
-        android:id="@+id/textView"
-        android:layout_gravity="center_horizontal|top" />
-
     <Button
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="5dp"
+        android:id="@+id/resourceSearchButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/rate_us"
-        android:id="@+id/button"
-        android:onClick="rateIt"
-        android:layout_gravity="center_horizontal|bottom"
-        android:background="#ff5b88f0"
-        android:textColor="#fffdfdff"/>
+        android:text="Advanced Search"
+        android:background="@color/button_color_unselected"
+        android:textColor="@color/button_text"
+        android:onClick="goResAdvanced"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/listViewRec"
+            android:layout_gravity="center_vertical"></ListView>
+    </LinearLayout>
 
 </LinearLayout>
